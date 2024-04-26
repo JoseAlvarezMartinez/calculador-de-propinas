@@ -6,14 +6,13 @@ export const useOrder = () => {
 
     const addItem = (item: MenuItems) => {
 
-        const itemExists: number = order.findIndex(element => element.id === item.id)
+        const itemExists = order.find(orderItem => orderItem.id === item.id)
 
-        if (itemExists >= 0) {
-            const newCart = [...order]
-            newCart[itemExists].quantity++
+        if (itemExists) {
+            const newCart = order.map(orderItem => orderItem.id === item.id ? { ...item, quantity: orderItem.quantity + 1 } : orderItem)
             setOrder(newCart)
         } else {
-            const newItem: MenuItemsOrder = { ...item, quantity: 1 }
+            const newItem = { ...item, quantity: 1 }
             setOrder([...order, newItem])
         }
     }
