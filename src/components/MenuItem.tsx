@@ -1,8 +1,8 @@
-import type { MenuItemInterface } from "../types"
+import type { MenuItems } from "../types"
 
 interface PropsMenuItem {
-  item: MenuItemInterface,
-  addItem: (newItem: MenuItemInterface) => void
+  item: MenuItems,
+  addItem: (item: MenuItems) => void
 }
 
 export const MenuItem = ({ item, addItem }: PropsMenuItem) => {

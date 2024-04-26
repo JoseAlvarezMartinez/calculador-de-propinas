@@ -1,9 +1,9 @@
-export interface MenuItemInterface {
-    id: number,
-    name: string,
-    price: number
+export interface MenuItems {
+  id: number,
+  name: string,
+  price: number
 }
 
-export interface MenuItemOrder extends MenuItemInterface {
-    quantity: number
+export interface MenuItemsOrder extends MenuItems {
+  quantity: number
 }

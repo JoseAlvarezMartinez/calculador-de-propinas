@@ -1,11 +1,10 @@
+import type { MenuItems, MenuItemsOrder } from "../types"
 import { useState } from "react"
-import type { MenuItemInterface, MenuItemOrder } from "../types"
-
 export const useOrder = () => {
 
-    const [order, setOrder] = useState<MenuItemOrder[]>([])
+    const [order, setOrder] = useState<MenuItemsOrder[]>([])
 
-    const addItem = (item: MenuItemInterface) => {
+    const addItem = (item: MenuItems) => {
 
         const itemExists: number = order.findIndex(element => element.id === item.id)
 
@@ -14,7 +13,7 @@ export const useOrder = () => {
             newCart[itemExists].quantity++
             setOrder(newCart)
         } else {
-            const newItem = { ...item, quantity: 1 }
+            const newItem: MenuItemsOrder = { ...item, quantity: 1 }
             setOrder([...order, newItem])
         }
     }
