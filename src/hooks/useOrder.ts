@@ -3,6 +3,7 @@ import { useState } from "react"
 export const useOrder = () => {
 
     const [order, setOrder] = useState<MenuItemsOrder[]>([])
+    const [tip, setTip] = useState(0)
 
     const addItem = (item: MenuItems) => {
 
@@ -17,7 +18,7 @@ export const useOrder = () => {
         }
     }
 
-    const deleteItem = (item:MenuItems['id']) => {
+    const deleteItem = (item: MenuItems['id']) => {
         const filter = order.filter(orderItem => orderItem.id !== item)
 
         setOrder(filter)
@@ -25,6 +26,7 @@ export const useOrder = () => {
     return {
         addItem,
         order,
-        deleteItem
+        deleteItem,
+        tip, setTip
     }
 }
