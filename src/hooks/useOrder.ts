@@ -5,6 +5,7 @@ export const useOrder = () => {
     const [order, setOrder] = useState<MenuItemsOrder[]>([])
     const [tip, setTip] = useState(0)
 
+
     const addItem = (item: MenuItems) => {
 
         const itemExists = order.find(orderItem => orderItem.id === item.id)
@@ -23,10 +24,20 @@ export const useOrder = () => {
 
         setOrder(filter)
     }
+    const placeOrder = () => {
+        setOrder([])
+        setTip(0)
+    }
+
+
+
     return {
         addItem,
         order,
         deleteItem,
-        tip, setTip
+        tip,
+        setTip,
+        placeOrder
+
     }
 }

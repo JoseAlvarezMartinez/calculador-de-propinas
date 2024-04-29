@@ -3,12 +3,18 @@ import { formatCurrency } from "../helpers"
 import { useMemo } from "react"
 
 interface PropOrderTotals {
-    order: MenuItemsOrder[]
+    order: MenuItemsOrder[],
+    tip: number,
+    placeOrder:() => void
 }
 
-const OrderTotals = ({ order }: PropOrderTotals) => {
+const OrderTotals = ({ order, tip,placeOrder }: PropOrderTotals) => {
 
     const subTotalAmount = useMemo(() => order.reduce((totalItem, item) => totalItem + (item.quantity * item.price), 0), [order])
+
+    const tipAmount = useMemo(() => subTotalAmount * tip, [tip, order])
+
+    const totalAmount = useMemo(() => tipAmount + subTotalAmount, [tip, order])
 
     return (
         <>
@@ -18,15 +24,18 @@ const OrderTotals = ({ order }: PropOrderTotals) => {
 
 
                 <p>Propina:
-                    <span>$0</span>
+                    <span>{formatCurrency(tipAmount)}</span>
                 </p>
 
                 <p>Total a pagar:
-                    {/* <span>{formatCurrency(total)}</span> */}
+                    <span>{formatCurrency(totalAmount)}</span>
                 </p>
             </div>
 
-            <button></button>
+            <button 
+            onClick={placeOrder}
+            disabled={totalAmount === 0}
+            className="w-full disabled:opacity-10 bg-black p-3 uppercase text-white font-bold mt-10">Guardar Orden</button>
         </>
     )
 }
